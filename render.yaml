@@ -1,0 +1,130 @@
+services:
+  - type: web
+    name: whatsapp-auto-bot
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    
+    envVars:
+      - key: NODE_ENV
+        value: production
+      
+      - key: PORT
+        value: 3000
+      
+      - key: PUPPETEER_SKIP_CHROMIUM_DOWNLOAD
+        value: true
+      
+      - key: PUPPETEER_EXECUTABLE_PATH
+        value: /usr/bin/google-chrome-stable
+      
+      # Database Configuration
+      - key: DB_HOST
+        value: cashearnersofficial.xyz
+      
+      - key: DB_USER
+        value: cztldhwx_Auto_PostTg
+      
+      - key: DB_PASSWORD
+        value: Aptap786920
+      
+      - key: DB_NAME
+        value: cztldhwx_Auto_PostTg
+      
+      - key: DB_PORT
+        value: 3306
+      
+      # AI Configuration (Add your actual API key here)
+      - key: GEMINI_API_KEY
+        value: your_gemini_api_key_here
+      
+      - key: GEMINI_MODEL
+        value: gemini-2.0-flash
+      
+      # Bot Configuration
+      - key: BOT_NAME
+        value: WhatsApp Assistant
+      
+      - key: BOT_PERSONALITY
+        value: friendly_helpful_human_like
+      
+      - key: AUTO_REPLY_ENABLED
+        value: true
+      
+      - key: TYPING_SIMULATION
+        value: true
+      
+      - key: DEFAULT_LANGUAGE
+        value: hinglish
+      
+      # Rate Limiting
+      - key: RATE_LIMIT_WINDOW
+        value: 60000
+      
+      - key: RATE_LIMIT_MAX_REQUESTS
+        value: 30
+      
+      - key: MESSAGE_RATE_LIMIT
+        value: 2
+      
+      # Session Management
+      - key: SESSION_PREFIX
+        value: whatsapp_bot_
+      
+      - key: MAX_SESSIONS
+        value: 5
+      
+      - key: SESSION_TIMEOUT
+        value: 3600000
+      
+      # Security
+      - key: CORS_ORIGINS
+        value: "*"
+      
+      # Logging
+      - key: LOG_LEVEL
+        value: INFO
+      
+      - key: ENABLE_DEBUG
+        value: false
+      
+      # AI Reply Configuration
+      - key: AI_REPLY_DELAY_MIN
+        value: 1000
+      
+      - key: AI_REPLY_DELAY_MAX
+        value: 3000
+      
+      - key: FALLBACK_REPLY
+        value: "Sorry yaar, thoda issue ho gaya. Tum bolo kya chahiye?"
+    
+    # Build settings
+    buildFilter:
+      paths:
+        - package.json
+        - package-lock.json
+        - "**/*.js"
+      ignoredPaths:
+        - "**/*.md"
+        - "**/*.txt"
+        - ".git/**"
+        - "node_modules/**"
+    
+    # Health check settings
+    healthCheck:
+      path: /health
+      intervalSeconds: 30
+      timeoutSeconds: 10
+      
+    # Auto-deploy settings
+    autoDeploy: true
+    
+    # Resource limits (Free tier)
+    disk:
+      name: whatsapp-bot-disk
+      size: 500MB
+      
+    # Environment specific settings
+    runtime: nodejs18
